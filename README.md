@@ -2,7 +2,7 @@
 _Syamukonka @ code200_
 
 ### Quick Start Guide
-To run this application, open and run the `Main.java` class. Use the console to interact with the application. You'll be presented with two applications, the **Billing Application** and **Customer Application**. You can interact with any of them. Each application will keep running until you prompt it to exit with the specified option. 
+To run this application, open and run the `Main` class. Use the console to interact with the application. You'll be presented with two applications, the **Billing Application** and **Customer Application**. You can interact with any of them. Each application will keep running until you prompt it to exit with the specified option. 
 
 
 ### Project details
