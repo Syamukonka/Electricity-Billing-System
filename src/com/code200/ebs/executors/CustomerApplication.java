@@ -5,7 +5,11 @@ import com.code200.ebs.entities.*;
 
 public class CustomerApplication implements ScanningTools {
 
-    private static Consumer consumer = new DomesticConsumer("Emilia Clark","29 Dawn Street, East watch, Essos.");
+    private static Consumer consumer = new DomesticConsumer("Emilia Clarke","29 Dawn Street, East watch, Essos.");
+
+    public static void main(String[] args) {
+        run();
+    }
 
     public static void run() {
         //console interface
@@ -16,8 +20,8 @@ public class CustomerApplication implements ScanningTools {
         while(run){
             consumer.simulateUsage(30);
             System.out.println("\nHi, "+consumer.getName());
-            System.out.println("\nPress 1 - to start the application");
-            System.out.println("Press 2 - to close the application");
+            System.out.println("\nPress 1 - Start session");
+            System.out.println("Press 2 - Close");
             switch (ScanningTools.scanInt()){
                 case 1 -> {
                     String action = "";
@@ -37,7 +41,7 @@ public class CustomerApplication implements ScanningTools {
                                 System.out.println();
                                 System.out.println("""
                                     \n1. Go back
-                                    2. Exit
+                                    2. End session
                                     """);
                                 if(ScanningTools.scanInt()==2)
                                     action = "x";
@@ -46,9 +50,8 @@ public class CustomerApplication implements ScanningTools {
                             case 2 -> {
                                 System.out.println(consumer.getMeter());
                                 System.out.println("""
-                                    \n1. to go back
-                                    2. to exit 
-                                    """);
+                                    \n1. Go back
+                                    2. End Session                                    """);
                                 if(ScanningTools.scanInt()==2)
                                     action = "x";
                             }
@@ -65,8 +68,8 @@ public class CustomerApplication implements ScanningTools {
                                 int months = ScanningTools.scanInt();
                                 UsageReport.generate(consumer,months);
                                 System.out.println("""
-                                    \n1. to go back
-                                    2. to exit 
+                                    \n1. Go back
+                                    2. End Session
                                     """);
                                 if(ScanningTools.scanInt()==2)
                                     action = "x";
@@ -79,39 +82,42 @@ public class CustomerApplication implements ScanningTools {
                                 String address = ScanningTools.scanLine();
                                 if(name!=null && !name.isEmpty()){
                                     if(address!=null && !address.isEmpty()){
-                                        consumer.setName(name);
                                         consumer.setAddress(address);
-
-                                        System.out.println("✅Successfully updated");
-                                        System.out.println(consumer);
-                                        System.out.println("""
-                                            \n1. Go back
-                                            2. Exit
-                                            """);
-                                        if(ScanningTools.scanInt()==2)
-                                            action = "x";
                                     }
+                                    consumer.setName(name);
+                                    System.out.println("✅Successfully updated");
+                                    System.out.println(consumer);
                                 }else{
                                     System.out.println("Profile not updated");
-                                    System.out.println("""
-                                    \n1. Go back
-                                    2. Exit 
-                                    """);
-                                    if(ScanningTools.scanInt()==2)
-                                        action = "x";
                                 }
+                                System.out.println("""
+                                        \n1. Go back
+                                        2. End session
+                                        """);
+                                if(ScanningTools.scanInt()==2)
+                                    action = "x";
                             }
                             case 6 ->{
                                 System.out.println(consumer);
                                 System.out.println("""
-                                    \n1. to go back
-                                    2. to exit 
+                                    \n1. Go back
+                                    2. End Session  
                                     """);
                                 if(ScanningTools.scanInt()==2)
                                     action = "x";
 
                             }
                             case 7 -> {
+                                consumer.simulateUsage(30);
+                                System.out.println("""
+                                    \n✅ Meter updated
+                                    1. Go back
+                                    2. End Session 
+                                    """);
+                                if(ScanningTools.scanInt()==2)
+                                    action = "x";
+                            }
+                            case 8 -> {
                                 action = "x";
                             }
                             default -> {
@@ -152,7 +158,7 @@ public class CustomerApplication implements ScanningTools {
                         2. No
                         """);
                 if(ScanningTools.scanInt()==1){
-                    System.out.printf("Successfully paid $%.2f\nPress 0 - to exit%n%n",amount);
+                    System.out.printf("Successfully paid $%.2f\nPress 0 - Exit payment%n%n",amount);
                     ScanningTools.scanInt();
                     return amount;
 
@@ -169,7 +175,8 @@ public class CustomerApplication implements ScanningTools {
                 4. Usage report
                 5. Update Profile
                 6. View Profile
-                7. Exit
+                7. Simulate 1 month usage
+                8. Exit
                 """);
     }
 

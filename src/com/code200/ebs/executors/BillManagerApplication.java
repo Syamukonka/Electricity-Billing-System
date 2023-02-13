@@ -18,6 +18,10 @@ public class BillManagerApplication {
                 new DomesticConsumer("Dallas Bronn", "Room 305 - Vinayak Apartment, Law Gate Phagwara, India"),
         },0,consumers,0,9);
     }
+
+    public static void main(String[] args) {
+        run();
+    }
     public static void run() {
         //run application
         boolean run = true;
